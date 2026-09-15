@@ -7,7 +7,7 @@ from ultralytics import YOLO
 from capture import ScreenCapture
 
 
-def load_config(path="./configs/config.yaml"):
+def load_config(path="../configs/config.yaml"):
     with open(path, "r") as f:
         return yaml.safe_load(f)
 
