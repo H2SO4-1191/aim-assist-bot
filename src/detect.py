@@ -1,13 +1,3 @@
-"""
-Step 1 milestone: prove the capture -> inference loop hits a usable FPS
-BEFORE we add targeting or aim actuation. If this isn't fast enough,
-nothing downstream will be either.
-
-Run this once you have `models/yolo_enemy_detector.pt` — for now, before
-you have a trained model, point `model.weights` in config.yaml at a
-stock `yolov8n.pt` (COCO-pretrained) just to validate the pipeline speed;
-COCO's "person" class is a fine stand-in until your real dataset exists.
-"""
 import time
 import yaml
 import cv2

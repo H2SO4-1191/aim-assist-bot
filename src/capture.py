@@ -1,15 +1,3 @@
-"""
-Screen capture module.
-
-Uses dxcam (Windows Desktop Duplication API) for low-latency capture.
-This is the #1 bottleneck in most "real-time CV over games" projects —
-mss/PIL-based capture is often 30-80ms per frame, which alone blows your
-latency budget. dxcam typically gets this to 2-5ms.
-
-On Linux (no dxcam support), falls back to `mss` automatically so you can
-still develop/test the pipeline before moving to the Windows machine
-you'll actually run this on for game capture.
-"""
 import time
 import numpy as np
 
