@@ -1,0 +1,20 @@
+# Core ML
+torch>=2.2.0          # install the CUDA-matched build from pytorch.org, not plain pip
+torchvision>=0.17.0
+ultralytics>=8.2.0    # YOLOv8/YOLO11 training + inference
+
+# Fast screen capture (Windows Desktop Duplication API wrapper)
+dxcam>=0.0.5          # Windows only. Linux alt: mss (slower) or pyscreenshot
+
+# Dataset tooling
+opencv-python>=4.9.0
+numpy>=1.26.0
+albumentations>=1.4.0 # augmentation for training
+labelImg              # optional manual bbox labeling GUI (or use Roboflow web UI instead)
+
+# Input control (used later, for the aim-actuation step)
+pydirectinput          # safer than pyautogui for games (uses SendInput, not just cursor warp)
+
+# Utilities
+pyyaml
+tqdm
