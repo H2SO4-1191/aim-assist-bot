@@ -1,10 +1,3 @@
-"""
-Step 2c-2: Count actual box instances per class, across ALL label files
-(not just one sample). This tells us:
-- What fraction of frames actually have objects vs. are empty
-- Whether each class has enough instances to be worth training on
-- Whether "unused" classes (like Valorant-enemy id 0) truly never appear
-"""
 from pathlib import Path
 from collections import Counter
 import yaml

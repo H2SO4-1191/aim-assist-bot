@@ -1,25 +1,3 @@
-"""
-Step 2d: Merge valorant_davidhong + csgo_aimbot_v5 into one Stage 1
-dataset with a single class: `player` (id 0).
-
-Remapping:
-- valorant_davidhong: class 1 ("enemy") -> player. Classes 0 ("Valorant-enemy",
-  unused) and 2 ("enemy_head") are DROPPED for this stage — head boxes would
-  create overlapping/nested "player" boxes for the same object, which hurts
-  training. Revisit head boxes later for headshot-priority targeting.
-- csgo_aimbot_v5: class 0 ("terrorist") -> player. Class 1 ("terrorist_head")
-  dropped for the same reason.
-
-Known limitation (accepted per plan): Valorant contributes ~10x more
-instances than CS:GO, so the merged model will be Valorant-biased until
-more CS:GO data is added later via fine-tuning.
-
-Output structure:
-  data/stage1_final/
-    images/{train,valid,test}/
-    labels/{train,valid,test}/
-    data.yaml
-"""
 import shutil
 from pathlib import Path
 import yaml
