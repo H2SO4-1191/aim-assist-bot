@@ -1,12 +1,12 @@
 # --- Capture settings ---
 capture:
-  region: null          # null = full screen; or [left, top, right, bottom] to capture a smaller box around crosshair for speed
-  target_fps: 60         # capture loop target; real achieved FPS depends on GPU
+  region: null # null = full screen; or [left, top, right, bottom] to capture a smaller box around crosshair for speed
+  target_fps: 60 # capture loop target; real achieved FPS depends on GPU
 
 # --- Model settings ---
 model:
-  weights: "models/yolo_enemy_detector.pt"
-  imgsz: 640              # inference resolution; drop to 480 or 320 if you need more speed
+  weights: "../models/enemy_detector.pt"
+  imgsz: 1536 # inference resolution; drop to 480 or 320 if you need more speed
   conf_threshold: 0.45
   iou_threshold: 0.45
   device: "cuda:0"
@@ -22,8 +22,8 @@ targeting:
   # weight for scoring candidate boxes: lower distance-to-crosshair and larger box size = higher priority
   distance_weight: 0.7
   size_weight: 0.3
-  max_target_switch_hz: 8   # prevents jittery target swapping between similarly-scored boxes
+  max_target_switch_hz: 8 # prevents jittery target swapping between similarly-scored boxes
 
 # --- Logging ---
 log_dir: "logs/"
-benchmark: true   # print per-frame timing breakdown (capture/inference/postprocess)
+benchmark: true # print per-frame timing breakdown (capture/inference/postprocess)
