@@ -5,7 +5,7 @@ class SharedState:
         self._lock = threading.Lock()
         self.enabled = False
         self.ads_only = False
-        self.strength = 0.15
+        self.strength = 0.05
         self.running = True  # set False to signal both threads to stop
 
     def get_snapshot(self):

@@ -1,13 +1,3 @@
-"""
-Relative mouse movement via Windows SendInput API.
-
-Why not pydirectinput/pyautogui for this: those move the mouse by setting
-absolute cursor position (SetCursorPos under the hood). Most FPS games
-read RAW mouse input (hardware deltas) instead of cursor position for
-camera control — moving the OS cursor does nothing to the in-game view
-in that case. SendInput with MOUSEEVENTF_MOVE sends actual relative
-deltas, which raw-input games do respond to.
-"""
 import ctypes
 import time
 

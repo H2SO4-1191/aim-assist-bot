@@ -1,17 +1,3 @@
-"""
-Target tracking with stickiness — fixes the "jumping between targets"
-problem. Plain select_target() recomputes the single best target from
-scratch every frame with no memory, so if two enemies are similarly
-close to center (or detections flicker frame to frame), it can flip
-between them constantly, making the assist feel chaotic instead of
-locking onto one target like a real aim-assist would.
-
-Fix: once locked onto a target, keep tracking THAT target across frames
-by matching it to the closest new detection (by position), even if a
-different detection is technically now closer to center. Only actually
-switch targets when the locked one is lost (no matching detection found
-for a few consecutive frames) or disappears entirely.
-"""
 import math
 import time
 from targeting import select_target

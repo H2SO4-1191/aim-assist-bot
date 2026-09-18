@@ -1,9 +1,3 @@
-"""
-Step 7: Full application — detection + targeting + actuation running in
-a background thread, with the Tkinter control panel in the main thread.
-F1 remains a global hotkey toggle for enable/disable, in addition to the
-UI checkbox (both write to the same SharedState, so either works).
-"""
 import threading
 import yaml
 import cv2
@@ -39,7 +33,7 @@ def detection_loop(state: SharedState):
     tracker = StickyTargetTracker(match_radius=60.0, lost_timeout=0.3)
     damper = OvershootDamper(damping_factor=0.25)
 
-    show_window = {"value": True}  # mutable so the F5 hotkey closure can flip it
+    show_window = {"value": False}  # mutable so the F5 hotkey closure can flip it
     keyboard.add_hotkey("f5", lambda: toggle_debug_window(show_window))
 
     try:

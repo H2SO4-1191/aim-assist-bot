@@ -1,9 +1,3 @@
-"""
-Simple always-on-top control panel: toggle assist on/off, toggle
-ADS-only mode, and a strength slider. Runs in the main thread (Tkinter
-requirement); the detection loop runs in a background thread and reads
-these values via SharedState.
-"""
 import tkinter as tk
 from tkinter import ttk
 
@@ -11,7 +5,7 @@ from tkinter import ttk
 def launch_ui(state):
     root = tk.Tk()
     root.title("Aim Assist Control")
-    root.geometry("280x220")
+    root.geometry("500x350")
     root.attributes("-topmost", True)  # stays above the game window
 
     def on_close():
