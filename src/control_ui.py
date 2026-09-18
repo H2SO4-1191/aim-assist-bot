@@ -1,9 +1,3 @@
-"""
-Simple always-on-top control panel: toggle assist on/off, toggle
-ADS-only mode, and a strength slider. Runs in the main thread (Tkinter
-requirement); the detection loop runs in a background thread and reads
-these values via SharedState.
-"""
 import tkinter as tk
 from tkinter import ttk
 

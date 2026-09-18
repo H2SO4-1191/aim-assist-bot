@@ -1,9 +1,3 @@
-"""
-Shared state between the UI thread and the detection/actuation thread.
-A simple lock-protected container — avoids the two threads stepping on
-each other when the UI writes a new strength value while the detection
-loop is mid-read.
-"""
 import threading
 
 class SharedState:

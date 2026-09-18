@@ -1,9 +1,3 @@
-"""
-Step 7: Full application — detection + targeting + actuation running in
-a background thread, with the Tkinter control panel in the main thread.
-F1 remains a global hotkey toggle for enable/disable, in addition to the
-UI checkbox (both write to the same SharedState, so either works).
-"""
 import threading
 import yaml
 import cv2

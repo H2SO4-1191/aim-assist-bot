@@ -1,8 +1,3 @@
-"""
-Check current key/mouse-button state via the Windows API — used to
-detect whether the player is currently holding down ADS (aim-down-sights,
-typically right mouse button in most shooters).
-"""
 import ctypes
 
 VK_RBUTTON = 0x02  # right mouse button — the default ADS key in most FPS games
