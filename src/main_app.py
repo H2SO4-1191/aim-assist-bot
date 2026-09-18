@@ -1,3 +1,9 @@
+"""
+Step 7: Full application — detection + targeting + actuation running in
+a background thread, with the Tkinter control panel in the main thread.
+F1 remains a global hotkey toggle for enable/disable, in addition to the
+UI checkbox (both write to the same SharedState, so either works).
+"""
 import threading
 import yaml
 import cv2
@@ -5,8 +11,8 @@ import keyboard
 from ultralytics import YOLO
 
 from capture import ScreenCapture
-from targeting import select_target
-from actuation import smoothed_move_toward
+from target_tracker import StickyTargetTracker
+from actuation import smoothed_move_toward, OvershootDamper
 from input_state import is_ads_held
 from shared_state import SharedState
 from control_ui import launch_ui
@@ -14,7 +20,7 @@ from control_ui import launch_ui
 MAX_STEP_PIXELS = 40
 DEADZONE_PIXELS = 8
 STRENGTH_STEP = 0.05
-STRENGTH_MIN, STRENGTH_MAX = 0.05, 0.6
+STRENGTH_MIN, STRENGTH_MAX = 0.05, 0.35
 
 
 def load_config(path="../configs/config.yaml"):
@@ -29,6 +35,9 @@ def detection_loop(state: SharedState):
 
     cap = ScreenCapture(region=cfg["capture"]["region"], target_fps=cfg["capture"]["target_fps"])
     print(f"Capture backend: {cap.backend}")
+
+    tracker = StickyTargetTracker(match_radius=60.0, lost_timeout=0.3)
+    damper = OvershootDamper(damping_factor=0.25)
 
     show_window = {"value": True}  # mutable so the F5 hotkey closure can flip it
     keyboard.add_hotkey("f5", lambda: toggle_debug_window(show_window))
@@ -53,7 +62,7 @@ def detection_loop(state: SharedState):
             boxes = results[0].boxes
 
             cx, cy = w // 2, h // 2
-            target = select_target(boxes, model.names, w, h)
+            target = tracker.update(boxes, model.names, w, h)
 
             should_act = snapshot["enabled"]
             if snapshot["ads_only"]:
@@ -62,6 +71,7 @@ def detection_loop(state: SharedState):
             if target and should_act:
                 tx, ty = target["center"]
                 dx, dy = tx - cx, ty - cy
+                dx, dy = damper.apply(dx, dy)  # brake if we just overshot last frame
                 if target["distance_to_crosshair"] > DEADZONE_PIXELS:
                     smoothed_move_toward(dx, dy, snapshot["strength"], MAX_STEP_PIXELS)
 
