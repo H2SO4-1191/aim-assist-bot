@@ -30,7 +30,7 @@ def detection_loop(state: SharedState):
     cap = ScreenCapture(region=cfg["capture"]["region"], target_fps=cfg["capture"]["target_fps"])
     print(f"Capture backend: {cap.backend}")
 
-    tracker = StickyTargetTracker(match_radius=60.0, lost_timeout=0.3)
+    tracker = StickyTargetTracker(match_radius=200.0, lost_timeout=0.4, engage_radius_fraction=0.15)
     damper = OvershootDamper(damping_factor=0.25)
 
     show_window = {"value": False}  # mutable so the F5 hotkey closure can flip it

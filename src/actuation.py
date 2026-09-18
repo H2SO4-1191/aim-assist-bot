@@ -80,7 +80,10 @@ def _mover_process_main(shared, running_flag, tick_hz: int, duration: float):
 
         if target_x != 0 or target_y != 0:
             elapsed = time.perf_counter() - start_time
-            fraction = min(1.0, elapsed / duration) if duration > 0 else 1.0
+            raw_fraction = min(1.0, elapsed / duration) if duration > 0 else 1.0
+            # ease-out: starts a bit quicker, decelerates into the target —
+            # still fully completes over `duration`, just not constant speed
+            fraction = 1 - (1 - raw_fraction) ** 2
 
             desired_x = target_x * fraction
             desired_y = target_y * fraction
@@ -108,7 +111,7 @@ def _mover_process_main(shared, running_flag, tick_hz: int, duration: float):
 
 
 class MouseSmootherProcess:
-    def __init__(self, tick_hz: int = 250, duration: float = 0.12):
+    def __init__(self, tick_hz: int = 400, duration: float = 0.12):
         """
         duration: how long ONE correction's linear glide should take.
         Tuned to roughly match the typical gap between detection updates
