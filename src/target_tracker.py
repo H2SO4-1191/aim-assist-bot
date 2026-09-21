@@ -4,22 +4,30 @@ from targeting import select_target
 
 
 class StickyTargetTracker:
-    def __init__(self, match_radius: float = 60.0, lost_timeout: float = 0.3):
+    def __init__(self, match_radius: float = 200.0, lost_timeout: float = 0.4,
+                 engage_radius_fraction: float = 0.15):
         """
         match_radius: how far (in pixels) a new detection can be from the
                       locked target's last known position and still count
-                      as "the same target" (handles normal frame-to-frame
-                      movement without losing lock).
+                      as "the same target."
         lost_timeout: how long (seconds) to tolerate the locked target not
                       being found before giving up and picking a new one.
+        engage_radius_fraction: fraction of the frame's diagonal within
+                      which a NEW target can be acquired — stops the
+                      assist from jumping across a crowded screen to
+                      whoever is technically "closest" out of everyone
+                      visible, however far away that still is.
         """
         self.match_radius = match_radius
         self.lost_timeout = lost_timeout
+        self.engage_radius_fraction = engage_radius_fraction
         self.locked_center = None
         self.last_seen_time = 0
 
     def update(self, boxes, model_names, frame_width, frame_height):
-        all_target = select_target(boxes, model_names, frame_width, frame_height)
+        engage_radius = self.engage_radius_fraction * math.hypot(frame_width, frame_height)
+        all_target = select_target(boxes, model_names, frame_width, frame_height,
+                                   max_distance=engage_radius)
 
         if self.locked_center is not None:
             candidates = self._all_candidates(boxes, model_names, frame_width, frame_height)

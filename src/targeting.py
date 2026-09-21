@@ -1,11 +1,17 @@
 import math
 
 
-def select_target(boxes, model_names, frame_width, frame_height):
+def select_target(boxes, model_names, frame_width, frame_height, max_distance=None):
     """
     boxes: ultralytics Boxes object (from results[0].boxes)
     model_names: dict like {0: 'player', 1: 'head'}
-    Returns: dict with target info, or None if nothing detected.
+    max_distance: if set, candidates farther than this from the crosshair
+                  are ignored entirely — a real aim-assist should only
+                  nudge toward someone already roughly where you're aiming,
+                  never jump across the screen to whoever is technically
+                  "closest" out of a whole crowd of visible people.
+    Returns: dict with target info, or None if nothing detected (or
+             nothing within max_distance).
     """
     center_x, center_y = frame_width / 2, frame_height / 2
 
@@ -19,6 +25,9 @@ def select_target(boxes, model_names, frame_width, frame_height):
         box_center_x = (x1 + x2) / 2
         box_center_y = (y1 + y2) / 2
         distance = math.hypot(box_center_x - center_x, box_center_y - center_y)
+
+        if max_distance is not None and distance > max_distance:
+            continue
 
         entry = {
             "class": cls_name,

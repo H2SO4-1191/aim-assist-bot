@@ -8,7 +8,7 @@ def main():
         epochs=50,
         imgsz=640,
         batch=16,           # drop to 8 if you hit CUDA out-of-memory on 8GB VRAM
-        device=0,           # GPU 0 (RTX 3070)
+        device=0,           # GPU 0 
         patience=15,        # stop early if val mAP doesn't improve for 15 epochs
         project="../models/runs",
         name="stage1_player_detector",

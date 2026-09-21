@@ -13,9 +13,8 @@ model:
 
 # --- Class map (edit once you finalize your dataset labels) ---
 classes:
-  0: enemy
-  1: friendly
-  2: npc
+  0: player
+  1: head
 
 # --- Target selection ---
 targeting:
