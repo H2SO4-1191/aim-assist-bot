@@ -33,6 +33,10 @@ aim-assist-bot/
 └── README.md
 ```
 
+## Important!
+
+This is now patched on most online gaming platforms, though it could still work on offline games or games with weak anti-cheat systems.
+
 ## Installation
 
 - `git clone https://github.com/H2SO4-1191/aim-assist-bot.git`
