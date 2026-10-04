@@ -14,6 +14,18 @@ Aim Assist Bot is a Python application that uses real-time object detection to h
 - Configurable assist strength, ADS-only mode, and global hotkeys (enable, ADS-only, strength, debug view)
 - Lightweight control panel UI for toggling settings on the fly
 
+## Screenshots (Test on Assault Cube)
+
+<p align="center">
+  <img src="screenshots/control-ui.PNG" width="45%" />
+  <img src="screenshots/enemy-detection.PNG" width="45%" />
+</p>
+
+<p align="center">
+  <img src="screenshots/aim-assist-test-1.gif" width="45%" />
+  <img src="screenshots/aim-assist-test-2.gif" width="45%" />
+</p>
+
 ## Tech Stack
 
 - Core: Python, PyTorch, Ultralytics YOLO, OpenCV
