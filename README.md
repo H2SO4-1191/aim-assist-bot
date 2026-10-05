@@ -26,6 +26,14 @@ Aim Assist Bot is a Python application that uses real-time object detection to h
   <img src="screenshots/aim-assist-test-2.gif" width="45%" />
 </p>
 
+## Demo Video (COD BO2 test match)
+
+<p align="center">
+  <a href="https://youtu.be/gIzqQaesNcQ">
+    <img src="https://img.youtube.com/vi/gIzqQaesNcQ/maxresdefault.jpg" width="70%" />
+  </a>
+</p>
+
 ## Tech Stack
 
 - Core: Python, PyTorch, Ultralytics YOLO, OpenCV
@@ -40,7 +48,7 @@ Aim Assist Bot is a Python application that uses real-time object detection to h
 aim-assist-bot/
 ├── src/            # Application source code (capture, detection, targeting, actuation, UI)
 ├── configs/        # config.yaml — capture, model, and targeting settings
-├── models/         # Trained/downloaded YOLO weights (not tracked in git)
+├── models/         # Trained/downloaded YOLO weights
 ├── data/           # Training datasets (not tracked in git)
 └── README.md
 ```
@@ -54,7 +62,7 @@ This is now patched on most online gaming platforms, though it could still work 
 - `git clone https://github.com/H2SO4-1191/aim-assist-bot.git`
 - Create a virtual environment and install dependencies from `requirements.txt`
 - Install the CUDA-matched build of PyTorch for your GPU
-- Place a trained YOLO model in `models/` and update the path in `configs/config.yaml`
+- pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu124
 - Run `python src/main_app.py`
 
 ## Note
